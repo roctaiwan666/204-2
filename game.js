@@ -149,8 +149,38 @@ class Enemy {
     }
 
     draw() {
-        this.game.ctx.fillStyle = '#F44336';
-        this.game.ctx.fillRect(this.x, this.y, this.width, this.height);
+        const ctx = this.game.ctx;
+        ctx.save();
+        ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+        
+        // 設置飛機顏色
+        ctx.fillStyle = '#F44336';
+        ctx.strokeStyle = '#B71C1C';
+        ctx.lineWidth = 2;
+
+        // 開始繪製飛機
+        ctx.beginPath();
+        
+        // 機身
+        ctx.moveTo(0, -this.height / 2);
+        ctx.lineTo(this.width / 4, this.height / 4);
+        ctx.lineTo(-this.width / 4, this.height / 4);
+        ctx.closePath();
+        
+        // 填充機身
+        ctx.fill();
+        ctx.stroke();
+
+        // 機翼
+        ctx.beginPath();
+        ctx.moveTo(-this.width / 2, 0);
+        ctx.lineTo(this.width / 2, 0);
+        ctx.lineTo(0, -this.height / 4);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.restore();
     }
 
     hit() {
